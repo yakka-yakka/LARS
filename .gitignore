@@ -1,0 +1,13 @@
+# Local Environments
+python_env/
+ahk_env/
+python.zip
+ahk.zip
+
+# Runtime Generated
+settings.ini
+run_hidden.vbs
+
+# Python Artifacts
+__pycache__/
+*.pyc
