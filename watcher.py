@@ -33,10 +33,13 @@ def find_arma_window():
                 buff = ctypes.create_unicode_buffer(length + 1)
                 GetWindowText(hwnd, buff, length + 1)
                 title = buff.value.lower()
-                # Check for standard Arma Reforger window titles
+                
+                # Check for game title while heavily filtering out obvious false-positives (Web Browsers, IDEs, GitHub strings)
                 if "arma reforger" in title:
-                    found_hwnd = hwnd
-                    return False  # Stop searching once found
+                    false_positives = ["chrome", "firefox", "edge", "opera", "github", "code", "notepad", "discord", "brave"]
+                    if not any(fp in title for fp in false_positives):
+                        found_hwnd = hwnd
+                        return False  # Stop searching once found
         return True
 
     EnumWindows(EnumWindowsProc(foreach_window), 0)
